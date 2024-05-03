@@ -70,9 +70,8 @@ TEMPLATES = [
 WSGI_APPLICATION = "RecipePal.wsgi.application"
 
 
-# Database
+# Database (PostgresSQL)
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
