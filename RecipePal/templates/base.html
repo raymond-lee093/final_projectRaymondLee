@@ -5,9 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RecipePal</title>
-    <!-- load static file -->
+    <!-- load static files -->
     {% load static %}
     <link href="{% static 'main/style.css' %}" rel="stylesheet">
+    <!-- bootstrap -->
+    <link href="{% static 'bootstrap/css/bootstrap.min.css'%}">
+
 </head>
 <body>
     <!-- HEADER -->
@@ -21,5 +24,9 @@
 
     <!-- FOOTER -->
     {% include "snippets/footer.html" %}
+
+    <!-- include bootstrap javascript files -->
+    <script src="{% static 'bootstrap/js/bootstrap.bundle.js' %}"></script>
+
 </body>
 </html>
