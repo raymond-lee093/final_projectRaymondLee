@@ -114,8 +114,24 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-# base url to serve static and media files
-STATIC_URL = "static/"
+# Added static and media directories to Djangos STATICFILES_DIRS
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+    os.path.join(BASE_DIR, "media"),
+]
+
+# Base url to serve static files
+STATIC_URL = "/static/"
+# Base url to serve media files
+MEDIA_URL = "/media/"
+
+# Where static and media files are collected in Django server(content delivery network)
+STATIC_ROOT = os.path.join(BASE_DIR, "static_cdn")
+MEDIA_ROOT = os.path.join(BASE_DIR, "media_cdn")
+
+# When cropping images must save a temporary image on the server
+# TEMP is a constant that points to that directory
+TEMP = os.path.join(BASE_DIR, "media_cdn/temp")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
