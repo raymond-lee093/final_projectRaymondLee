@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RecipePal</title>
+    <style type="text/css">
+    /*
+        class ensures that the element it's applied to takes up at least
+        100% of the viewport height, and if there's more content, it expands
+        to accommodate it
+    */
+    .main{
+        min-height: 100vh;
+        height: 100%;
+    }
+</style>
+</head>
+<body>
+    <!-- HEADER -->
+    {% include "snippets/header.html" %}
+
+    <!-- BODY -->
+    <div class="main">
+        {% block content %}
+        {$ endblock content %}
+    </div>
+
+    <!-- FOOTER -->
+    {% include "snippets/footer.html" %}
+</body>
+</html>
