@@ -18,12 +18,17 @@
 </style>
 </head>
 <body>
+    <!-- load static file -->
+    {% load static %}
+    <link href="{% static 'main/style.css' %}" rel="stylesheet">
+
     <!-- HEADER -->
     {% include "snippets/header.html" %}
 
     <!-- BODY -->
     <div class="main">
         {% block content %}
+
         {$ endblock content %}
     </div>
 
