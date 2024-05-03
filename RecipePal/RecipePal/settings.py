@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # My app
     "main.apps.MainConfig",
 ]
 
@@ -56,7 +57,7 @@ ROOT_URLCONF = "RecipePal.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR/"templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -112,16 +113,10 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
-    os.path.join(BASE_DIR, "media"),
-]
+
 # base url to serve static and media files
-STATIC_URL = "/static/"
-MEDIA_URL = "/media/"
-# specifies directory where Django collects static and media files
-STATIC_ROOT = os.path.join(BASE_DIR, "static_cdn")
-MEDIA_ROOT = os.path.join(BASE_DIR, "media_cdn")
+STATIC_URL = "static/"
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
