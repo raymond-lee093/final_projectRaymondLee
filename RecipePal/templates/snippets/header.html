@@ -3,7 +3,7 @@
 <link href="{% static 'main/style.css' %}" rel="stylesheet">
 
 <div class="d-flex p-3 px-md-4 mb-4 bg-white border-bottom shadow-sm">
-    <!-- Medium and larger screens -->
+    <!-- Medium to large screen -->
     <div class="d-none d-md-flex flex-row my-auto flex-grow-1 align-items-center">
         <!-- col1 in flex-row-->
         <h5 class="mr-3 font-weight-normal justify-content-start">
@@ -21,9 +21,9 @@
                 <!-- user is logged in-->
                 {% if request.user.is_authenticated %}
                     <!-- dropdown button for account and logout-->
-                    <div class="btn-group">
+                    <div class="btn-group dropstart">
                         <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img class="account-image rounded-circle m-auto d-block" src="{% static "images/accountBoxIcon.png" %}" alt="account icon logo" width="20" height="20">
+                            <img class="account-image rounded-circle m-auto d-block" src="{% static "images/accountIcon.png" %}" alt="account icon logo" width="22" height="22">
                         </button>
                         <ul class="dropdown-menu dropdown-menu-dark">
                             <li><a class="dropdown-item" href="#">Account</a></li>
@@ -39,5 +39,44 @@
             </nav>
         </div>
     </div>
+
+    <!-- Small to medium screen -->
+    <div class="d-flex d-md-none flex-column mx-auto align-items-center">
+        <!-- row1 in flex-column-->
+        <h5 class="font-weight-normal justify-content-start">
+            <a class="p-2 text-dark" style="text-decoration: none" href="{% url "index" %}">Home</a>
+        </h5>
+        <!-- Search bar -->
+        <!-- row2 in flex-column-->
+        <form class="search-bar mb-2 justify-content-start">
+            {% csrf_token %}
+            <input type="text" class="form-control" name="query" id="id_q_small" placeholder="Search...">
+        </form>
+        <!-- row3 in flex-column-->
+        <div class="d-flex flex-row-reverse flex-grow-1">
+            <nav>
+                <!-- user is logged in-->
+                {% if request.user.is_authenticated %}
+                    <!-- dropdown button for account and logout-->
+                    <div class="btn-group dropstart">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img class="account-image rounded-circle m-auto d-block" src="{% static "images/accountIcon.png" %}" alt="account icon logo" width="22" height="22">
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-dark">
+                            <li><a class="dropdown-item" href="#">Account</a></li>
+                            <li><a class="dropdown-item" href="#">Logout</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- user is logged out-->
+                {% else %}
+                    <a class="p-2 text-dark" style="text-decoration: none" href="#">Login</a>
+                    <a class="btn btn-outline-primary" href="#">Register</a>
+                {% endif %}
+            </nav>
+        </div>
+    </div>
+
+
 </div>
 
