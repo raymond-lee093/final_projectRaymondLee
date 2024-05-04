@@ -1,51 +1,52 @@
-{% extends "base.html" %}
-
-{% block title %}Login{% endblock %}
+{% extends 'base.html' %}
 
 {% block content %}
     {% load static %}
     <link href="{% static 'main/style.css' %}" rel="stylesheet">
+
     <!-- Bootstrap CSS -->
     <!-- Webpage content -->
     <div class="container-fluid">
-        <h1 class="text-center mb-4">Recipe Pal</h1>
         <div class="row justify-content-center">
             <div class="card card-signin">
                 <div class="card-body">
-                    <!-- Login form -->
+                    <!-- Registration form -->
                     <form class="form-signin" method="post">
                         {% csrf_token %}
                         <!-- Logo image -->
                         <div class="d-flex flex-column pb-3">
                             <img class="img-fluid mx-auto d-block" src="{% static 'images/threeChefIcon.jpeg' %}" alt="Three chef clip art" width="150" height="150">
                         </div>
+
+                        <!-- Email field -->
+                        <input type="email" name="email" id="inputEmail" class="form-control mb-2" placeholder="Email address" required autofocus>
+
                         <!-- Username field -->
-                        <input type="text" name="username" id="inputUsername" class="form-control mb-2" placeholder="Username" required autofocus>
+                        <input type="text" name="username" id="inputUsername" class="form-control mb-2" placeholder="Username" required>
+
                         <!-- Password field -->
-                        <input type="password" name="password" id="inputPassword" class="form-control mb-2" placeholder="Password" required>
+                        <input type="password" name="password1" id="inputPassword1" class="form-control mb-2" placeholder="Password" required>
+
+                        <!-- Confirm password field -->
+                        <input type="password" name="password2" id="inputPassword2" class="form-control mb-2" placeholder="Confirm password" required>
 
                         <!-- Display form errors -->
-                        {% for field in login_form %}
+                        {% for field in registration_form %}
                             <p>
                                 {% for error in field.errors %}
                                     <p style="color: red">{{ error }}</p>
                                 {% endfor %}
                             </p>
                         {% endfor %}
-                        {% if login_form.non_field_errors %}
+                        {% if registration_form.non_field_errors %}
                             <div style="color: red">
-                                <p>{{login_form.non_field_errors}}</p>
+                                <p>{{ registration_form.non_field_errors }}</p>
                             </div>
                         {% endif %}
 
-                        <!-- Login button -->
-                        <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
+                        <!-- Register button -->
+                        <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
                     </form>
-
-                    <!-- Reset password link -->
-                    <div class="d-flex flex-column my-4">
-                        <a class="m-auto" style="text-decoration: none" href="#">Reset password</a>
-                    </div>
                 </div>
             </div>
         </div>
