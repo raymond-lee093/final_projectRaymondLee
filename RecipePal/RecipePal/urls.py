@@ -22,6 +22,8 @@ from django.conf import settings
 urlpatterns = [
     path("", include("main.urls")),
     path("admin/", admin.site.urls),
+    path("account/", include("django.contrib.auth.urls")),
+    path("account/", include("account.urls")),
 ]
 
 # Builds a url that tells Django where static and media files hosted in development
