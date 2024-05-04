@@ -1,3 +1,43 @@
-<div>
-    HEADER
+<!-- load static files -->
+{% load static %}
+<link href="{% static 'main/style.css' %}" rel="stylesheet">
+
+<div class="d-flex p-3 px-md-4 mb-4 bg-white border-bottom shadow-sm">
+    <!-- Medium and larger screens -->
+    <div class="d-none d-md-flex flex-row my-auto flex-grow-1 align-items-center">
+        <!-- col1 in flex-row-->
+        <h5 class="mr-3 font-weight-normal justify-content-start">
+            <a class="p-2 text-dark" style="text-decoration: none" href="{% url "index" %}">Home</a>
+        </h5>
+        <!-- Search bar -->
+        <!-- col2 in flex-row-->
+        <form class="search-bar justify-content-start">
+            {% csrf_token %}
+            <input type="text" class="form-control" name="query" id="id_q_large" placeholder="Search...">
+        </form>
+        <!-- col3 in flex-row-->
+        <div class="d-flex flex-row-reverse flex-grow-1">
+            <nav>
+                <!-- user is logged in-->
+                {% if request.user.is_authenticated %}
+                    <!-- dropdown button for account and logout-->
+                    <div class="btn-group">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img class="account-image rounded-circle m-auto d-block" src="{% static "images/accountBoxIcon.png" %}" alt="account icon logo" width="20" height="20">
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-dark">
+                            <li><a class="dropdown-item" href="#">Account</a></li>
+                            <li><a class="dropdown-item" href="#">Logout</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- user is logged out-->
+                {% else %}
+                    <a class="p-2 text-dark" style="text-decoration: none" href="#">Login</a>
+                    <a class="btn btn-outline-primary" href="#">Register</a>
+                {% endif %}
+            </nav>
+        </div>
+    </div>
 </div>
+
