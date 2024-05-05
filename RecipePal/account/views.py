@@ -31,6 +31,4 @@ def logout_user(request):
 
 def register_user(request):
     context = {}
-    if request.method == "POST":
-
     return render(request, "authentication/register.html", context)

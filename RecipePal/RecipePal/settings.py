@@ -28,6 +28,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# Authentication system will now use created Account model
+AUTH_USER_MODEL = 'account.Account'
 
 # Application definition
 

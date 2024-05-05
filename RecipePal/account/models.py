@@ -11,12 +11,13 @@ class MyAccountManager(BaseUserManager):
     def create_user(self, email, username, password=None):
         # Validate email and username
         if not email:
-            raise ValueError('Users must have an email address')
+            raise ValueError('Users must have an email address.')
         if not username:
-            raise ValueError('Users must have a username')
+            raise ValueError('Users must have a username.')
 
         # Create new user instance
         user = self.model(
+            # make characters lowercase
             email=self.normalize_email(email),
             username=username,
         )
@@ -66,17 +67,18 @@ class Account(AbstractBaseUser):
     profile_image   = models.ImageField(max_length=255, upload_to=get_profile_image_filepath, null=True, blank=True, default=get_default_profile_image)
     hide_email      = models.BooleanField(default=True)
 
-    REQUIRED_FIELDS = ['username']
+    REQUIRED_FIELDS = ['username', 'email']
 
     objects = MyAccountManager()
 
+    # Default return value when you don't access any fields
     def __str__(self):
         return self.username
 
     def get_profile_image_filename(self):
         return str(self.profile_image)[str(self.profile_image).index('profile_images/' + str(self.pk) + "/"):]
 
-    # For checking permissions. to keep it simple all admin have ALL permissons
+    # For checking permissions. to keep it simple all admin have ALL permissions
     def has_perm(self, perm, obj=None):
         return self.is_admin
 
