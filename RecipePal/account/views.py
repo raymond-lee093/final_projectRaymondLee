@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
+from django.http import HttpResponse
 from django.contrib import messages
+from . forms import RegistrationForm
 
 
 def login_user(request):
@@ -29,6 +31,36 @@ def logout_user(request):
     return redirect("account:login_user")
 
 
-def register_user(request):
+def register_user(request, *args, **kwargs):
+    # Check if the user is already authenticated
+    user = request.user
+    if user.is_authenticated:
+        return HttpResponse("You are already authenticated as " + str(user.username) + ".")
+
     context = {}
+    if request.POST:
+        # If the request method is POST, process the form data
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            # If the form is valid, save the user
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            # Authenticate the user and log them in
+            account = authenticate(username=username, password=raw_password)
+            login(request, account)
+            destination = kwargs.get("next")
+            if destination:
+                # Redirect to the next URL if provided
+                return redirect("destination")
+            # Redirect to the home page after successful registration
+            return redirect('main:index')
+        else:
+            # If the form is not valid, pass the form back to the template with errors
+            context['registration_form'] = form
+    else:
+        # If the request method is not POST, render the empty registration form
+        form = RegistrationForm()
+        context['registration_form'] = form
+
     return render(request, "authentication/register.html", context)

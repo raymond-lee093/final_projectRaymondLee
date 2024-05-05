@@ -64,14 +64,14 @@
                         </button>
                         <ul class="dropdown-menu dropdown-menu-dark">
                             <li><a class="dropdown-item" href="#">Account</a></li>
-                            <li><a class="dropdown-item" href="#">Logout</a></li>
+                            <li><a class="dropdown-item" href="{% url "account:logout_user" %}">Logout</a></li>
                         </ul>
                     </div>
 
                     <!-- user is logged out-->
                 {% else %}
-                    <a class="p-2 text-dark" style="text-decoration: none" href="#">Login</a>
-                    <a class="btn btn-outline-primary" href="#">Register</a>
+                    <a class="p-2 text-dark" style="text-decoration: none" href="{% url "account:login_user" %}">Login</a>
+                    <a class="btn btn-outline-primary" href="{% url "account:register_user" %}">Register</a>
                 {% endif %}
             </nav>
         </div>
