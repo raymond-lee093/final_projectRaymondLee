@@ -27,3 +27,8 @@ def logout_user(request):
     logout(request)
     messages.info(request, "User logged out.")
     return redirect("account:login_user")
+
+
+def register_user(request):
+    context = {}
+    return render(request, "authentication/register.html", context)
