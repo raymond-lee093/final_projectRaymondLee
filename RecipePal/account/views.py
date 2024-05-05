@@ -22,3 +22,8 @@ def login_user(request):
     else:
         return render(request, "authentication/login.html", context)
 
+
+def logout_user(request):
+    logout(request)
+    messages.info(request, "User logged out.")
+    return redirect("account:login_user")
