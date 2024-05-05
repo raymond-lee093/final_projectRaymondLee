@@ -50,7 +50,7 @@ def get_profile_image_filepath(self):
 
 # Function to define default profile image
 def get_default_profile_image():
-    return "../../static/images/dummmy_image.png"
+    return "images/dummy_image.png"
 
 
 # Custom user model
