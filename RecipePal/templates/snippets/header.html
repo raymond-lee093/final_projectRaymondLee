@@ -33,7 +33,7 @@
 
                     <!-- user is logged out-->
                 {% else %}
-                    <a class="p-2 text-dark" style="text-decoration: none" href="#">Login</a>
+                    <a class="p-2 text-dark" style="text-decoration: none" href="{% url "account:login_user" %}">Login</a>
                     <a class="btn btn-outline-primary" href="#">Register</a>
                 {% endif %}
             </nav>
