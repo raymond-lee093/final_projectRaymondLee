@@ -7,6 +7,8 @@
 
     <!--Bootstrap CSS-->
     <div class="container-fluid">
+
+    <h1 class="text-center mb-4">User Profile</h1>
         <div class="d-flex flex-row justify-content-center flex-wrap align-items-start">
 
             <!-- Profile Card -->
@@ -36,9 +38,10 @@
 
                     <!-- If Auth user is viewing their own profile -->
                     {% if is_self %}
-                    <a  class="mt-4 btn btn-primary" href="#">Update</a>
-                    <div class="d-flex flex-column mt-4">
-                        <a class="m-auto" style="text-decoration: none" href="{% url 'password_change' %}">Change password</a>
+                        <!--Variable included in path, must tell django what userid to use -->
+                        <a  class="mt-4 btn btn-primary" href="{% url "account:edit_account_view" user_id=id %}">Update</a>
+                        <div class="d-flex flex-column mt-4">
+                            <a class="m-auto" style="text-decoration: none" href="{% url 'password_change' %}">Change password</a>
                     </div>
                     {% endif %}
                 </div>

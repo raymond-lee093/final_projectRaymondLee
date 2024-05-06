@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse
 from django.contrib import messages
-from . forms import RegistrationForm
+from . forms import RegistrationForm, AccountUpdateForm
 from django.conf import settings
 from . models import Account
 
@@ -106,3 +106,57 @@ def account_view(request, *args, **kwargs):
 
         # Render the account.html template with the context
         return render(request, "authentication/account.html", context)
+
+
+def edit_account_view(request, *args, **kwargs):
+
+    # View for editing the user account details.
+
+    # Redirect to login page if user is not authenticated
+    if not request.user.is_authenticated:
+        return redirect("account:login_user")
+
+    # Retrieve the user's account
+    user_id = kwargs.get("user_id")
+    account = Account.objects.get(pk=user_id)
+
+    # Check if the user is trying to edit someone else's profile
+    if account.pk != request.user.pk:
+        return HttpResponse("You cannot edit someone else's profile.")
+
+    context = {}
+    if request.POST:
+        # Process the form data
+        form = AccountUpdateForm(request.POST, request.FILES, instance=request.user)
+        if form.is_valid():
+            form.save()
+            new_username = form.cleaned_data['username']
+            # Redirect to the user's profile page after successful update
+            return redirect("account:account_view", user_id=account.pk)
+        else:
+            # If form is not valid, render the form again with errors
+            form = AccountUpdateForm(
+                                     initial={
+                                         "id": account.pk,
+                                         "email": account.email,
+                                         "username": account.username,
+                                         "profile_image": account.profile_image,
+                                         "hide_email": account.hide_email,
+                                     }
+                                     )
+            context['form'] = form
+    else:
+        # Render the form with initial data
+        form = AccountUpdateForm(
+            initial={
+                "id": account.pk,
+                "email": account.email,
+                "username": account.username,
+                "profile_image": account.profile_image,
+                "hide_email": account.hide_email,
+            }
+        )
+        context['form'] = form
+    # Setting the max data size of an image
+    context['DATA_UPLOAD_MAX_MEMORY_SIZE'] = settings.DATA_UPLOAD_MAX_MEMORY_SIZE
+    return render(request, "authentication/edit_account.html", context)

@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block title %}Edit Account{% endblock %}
+
+{% block content %}
+    <!-- Load static files -->
+    {% load static %}
+    <link href="{% static 'main/style.css' %}" rel="stylesheet">
+    <div class="container-fluid">
+    <h1 class="text-center mb-4">User Profile</h1>
+    <div class="row justify-content-center">
+        <div class="card profile-card">
+            <div class="card-body">
+                <!-- Form for editing profile -->
+                <div class="d-flex flex-column mx-auto p-4">
+                    <!-- Profile image container -->
+                    <div class="image-container mx-auto text-center" id="id_image_container">
+                        <img class="border border-dark rounded-circle img-fluid profile-image" id="id_profile_image" src="{{form.initial.profile_image.url}}" alt="blank person logo">
+                        <div class="middle" id="id_middle_container">
+                        </div>
+                    </div>
+                    <!-- Profile edit form -->
+                    <form class="form-signin" method="post">{% csrf_token %}
+                        <input class="d-none" type="file" id="id_profile_image_file_selector" name="profile_image_file_selector" onchange="readURL(this)">
+                        <!-- Email field -->
+                        <h6 class="mt-4 field-heading">Email</h6>
+                        <input type="email" name="email" id="id_input_email" class="form-control" placeholder="Email address" required autofocus value={{form.initial.email}}>
+                        <!-- Username field -->
+                        <h6 class="mt-4 field-heading">Username</h6>
+                        <input type="text" name="username" id="id_input_username" class="form-control" placeholder="Username" required value="{{form.initial.username}}">
+
+                        <!-- Display form errors -->
+                        {% for field in form %}
+                        <p>
+                        {% for error in field.errors %}
+                        <p style="color: red">{{ error }}</p>
+                        {% endfor %}
+                        </p>
+                        {% endfor %}
+                        {% if form.non_field_errors %}
+                        <div style="color: red">
+                            <p>{{form.non_field_errors}}</p>
+                        </div>
+                        {% endif %}
+
+                        <!-- Submit button -->
+                        <div class="d-flex flex-column mt-4">
+                            <button class="mt-4 btn btn-primary flex-grow-1" type="submit">Save</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
