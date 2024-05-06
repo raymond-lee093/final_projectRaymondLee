@@ -3,6 +3,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse
 from django.contrib import messages
 from . forms import RegistrationForm
+from django.conf import settings
+from . models import Account
 
 
 def login_user(request):
@@ -64,3 +66,43 @@ def register_user(request, *args, **kwargs):
         context['registration_form'] = form
 
     return render(request, "authentication/register.html", context)
+
+
+def account_view(request, *args, **kwargs):
+    context = {}
+
+    # Get the user_id from kwargs
+    user_id = kwargs.get("user_id")
+
+    # Fetch the account object using user_id
+    try:
+        account = Account.objects.get(pk=user_id)
+    except:
+        return HttpResponse("User does not exist.")
+
+    # If account exists, set the context variables
+    if account:
+        context['id'] = account.id
+        context['username'] = account.username
+        context['email'] = account.email
+        context['profile_image'] = account.profile_image.url
+        context['hide_email'] = account.hide_email
+
+        # Define template variables
+        is_self = True
+        is_friend = False
+        user = request.user
+
+        # Check if the user is authenticated and not the same as the viewed profile
+        if user.is_authenticated and user != account:
+            is_self = False
+        elif not user.is_authenticated:
+            is_self = False
+
+        # Set the template variables to the values
+        context['is_self'] = is_self
+        context['is_friend'] = is_friend
+        context['BASE_URL'] = settings.BASE_URL
+
+        # Render the account.html template with the context
+        return render(request, "authentication/account.html", context)

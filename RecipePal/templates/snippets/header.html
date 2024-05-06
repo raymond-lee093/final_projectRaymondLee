@@ -26,7 +26,8 @@
                             <img class="account-image rounded-circle m-auto d-block" src="{{ request.user.profile_image.url }}" alt="account icon logo" width="22" height="22">
                         </button>
                         <ul class="dropdown-menu dropdown-menu-dark">
-                            <li><a class="dropdown-item" href="#">Account</a></li>
+                            <!--Variable included in path, must tell django what userid to use -->
+                            <li><a class="dropdown-item" href="{% url "account:account_view" user_id=request.user.id %}">Account</a></li>
                             <li><a class="dropdown-item" href="{% url "account:logout_user" %}">Logout</a></li>
                         </ul>
                     </div>
@@ -63,7 +64,8 @@
                             <img class="account-image rounded-circle m-auto d-block" src="{{ request.user.profile_image.url }}" alt="account icon logo" width="22" height="22">
                         </button>
                         <ul class="dropdown-menu dropdown-menu-dark">
-                            <li><a class="dropdown-item" href="#">Account</a></li>
+                            <!--Variable included in path, must tell django what userid to use -->
+                            <li><a class="dropdown-item" href="{% url "account:account_view" user_id=request.user.id %}">Account</a></li>
                             <li><a class="dropdown-item" href="{% url "account:logout_user" %}">Logout</a></li>
                         </ul>
                     </div>

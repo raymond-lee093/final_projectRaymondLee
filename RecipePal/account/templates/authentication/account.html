@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block title %}Account{% endblock %}
+{% block content %}
+    <!-- Load static files -->
+    {% load static %}
+    <link href="{% static 'main/style.css' %}" rel="stylesheet">
+
+    <!--Bootstrap CSS-->
+    <div class="container-fluid">
+        <div class="d-flex flex-row justify-content-center flex-wrap align-items-start">
+
+            <!-- Profile Card -->
+            <div class="card profile-card m-2">
+              <div class="card-body">
+                <div class="d-flex flex-column justify-content-center p-4">
+                    <!-- Profile Image -->
+                    <div class="image-container mx-auto mb-4">
+                        <img class="d-block border border-dark rounded-circle img-fluid mx-auto profile-image" alt="Profile Image" id="id_profile_image" src="{{profile_image}}">
+                    </div>
+                    <!-- Email -->
+                    <p class="mt-4 mb-1 field-heading">Email</p>
+                    {% if is_self %}
+                        <!-- If viewing own profile show email-->
+                        <h5>{{email}}</h5>
+                    {% else %}
+                        <!--otherwise hide email-->
+                        {% if hide_email %}
+                            <h5>**********</h5>
+                        {% else %}
+                            <h5>{{email}}</h5>
+                        {% endif %}
+                    {% endif %}
+                    <!-- Username -->
+                    <p class="mt-4 mb-1 field-heading">Username</p>
+                    <h5>{{username}}</h5>
+
+                    <!-- If Auth user is viewing their own profile -->
+                    {% if is_self %}
+                    <a  class="mt-4 btn btn-primary" href="#">Update</a>
+                    <div class="d-flex flex-column mt-4">
+                        <a class="m-auto" style="text-decoration: none" href="{% url 'password_change' %}">Change password</a>
+                    </div>
+                    {% endif %}
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
