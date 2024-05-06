@@ -1,14 +1,57 @@
-{% extends "base.html" %}
-{% block title %}Homepage{% endblock %}
+{% extends 'base.html' %}
+{% block title %}Recipe Search{% endblock %}
 {% block content %}
+    <!--Load static files-->
+    {% load static %}
+    <link href="{% static 'main/style.css' %}" rel="stylesheet">
+
     <!-- Bootstrap CSS -->
-    <div class="container">
-        <div class="d-flex flex-row">
-            <p class="m-auto">Item</p>
-            <p class="m-auto">Item</p>
-            <p class="m-auto">Item</p>
-            <p class="m-auto">Item</p>
-            <p class="m-auto">Item</p>
+    <!-- Webpage content -->
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="card card-signin">
+                <div class="card-body">
+                    <!-- Recipe form -->
+                    <form class="form-signin" method="GET">
+                    <h1 class="text-center mb-4">Recipe Search</h1>
+                        {% csrf_token %}
+                        <!-- Logo image -->
+                        <div class="d-flex flex-column pb-3">
+                            <img class="img-fluid mx-auto d-block" src="{% static 'images/threeChefIcon.jpeg' %}" alt="Three chef clip art" width="150" height="150">
+                        </div>
+                        <p style="font-size: small"><i>Note: Separate multiple inputs with commas.<br>
+                            Ex: pepper, salt, chicken</i></p>
+                        <!-- Ingredient field -->
+                        <input type="text" name="ingredient" id="inputIngredient" class="form-control mb-2" placeholder="Enter ingredient(s)" required autofocus>
+
+                        <!-- Cuisine field -->
+                        <input type="text" name="cuisine" id="inputCuisine" class="form-control mb-2" placeholder="Enter cuisine type(s)">
+
+                        <!-- Diet Restriction field -->
+                        <input type="text" name="dietrestriction" id="inputDietrestriction" class="form-control mb-2" placeholder="Enter dietary restriction(s)">
+
+                        <!-- Confirm password field -->
+                        <input type="text" name="mealtype" id="inputMealtype" class="form-control mb-2" placeholder="Enter meal type(s)">
+
+                        <!-- Display form errors -->
+                        {% for field in recipe_form %}
+                            <p>
+                                {% for error in field.errors %}
+                                    <p style="color: red">{{ error }}</p>
+                                {% endfor %}
+                            </p>
+                        {% endfor %}
+                        {% if recipe_form.non_field_errors %}
+                            <div style="color: red">
+                                <p>{{ recipe_form.non_field_errors }}</p>
+                            </div>
+                        {% endif %}
+
+                        <!-- Register button -->
+                        <button class="btn btn-lg btn-primary btn-block" type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
-{% endblock %}
+{% endblock content %}
