@@ -140,6 +140,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media_cdn")
 # TEMP is a constant that points to that directory
 TEMP = os.path.join(BASE_DIR, "media_cdn/temp")
 
+BASE_URL = "http://localhost:8000/"
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
