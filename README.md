@@ -55,4 +55,7 @@ command: GRANT ALL PRIVILEGES ON databasename TO django;
 to stop interacting with postgres 
 command: "\q"
 
+Spoonacular api docs
+https://spoonacular.com/food-api/docs
+
 
