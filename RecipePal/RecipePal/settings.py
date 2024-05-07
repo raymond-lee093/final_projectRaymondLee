@@ -45,8 +45,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # My apps
-    "main.apps.MainConfig",
     "account.apps.AccountConfig",
+    "spoonacular_api.apps.SpoonacularApiConfig",
 ]
 
 MIDDLEWARE = [
@@ -117,6 +117,8 @@ USE_I18N = True
 
 USE_TZ = True
 
+# Insert spoonacular api key here
+SPOONACULAR_API_KEY = ""
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/

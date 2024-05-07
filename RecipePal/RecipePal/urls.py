@@ -23,7 +23,6 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path("", RedirectView.as_view(url='account/login_user')),
-    path("main/", include("main.urls")),
     path("admin/", admin.site.urls),
     path("account/", include("account.urls")),
     # Spoonacular api url

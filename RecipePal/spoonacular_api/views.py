@@ -7,11 +7,6 @@ from django.conf import settings
 from django.shortcuts import render
 
 
-def home(request):
-    context = {}
-    return render(request, "spoonacular_api/home.html", context)
-
-
 def recipe_search(request):
     if request.method == 'POST':
         # Get the form data
