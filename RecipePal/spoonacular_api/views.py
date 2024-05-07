@@ -57,4 +57,4 @@ def recipe_search(request):
     else:
         # If the request is not POST, render the form
         form = RecipeForm()
-        return render(request, 'spoonacular_api/home.html', {'form': form})
+        return render(request, 'spoonacular_api/recipe_search.html', {'form': form})
