@@ -26,6 +26,8 @@ urlpatterns = [
     path("main/", include("main.urls")),
     path("admin/", admin.site.urls),
     path("account/", include("account.urls")),
+    # Spoonacular api url
+    path("api/", include("spoonacular_api.urls")),
     # Password reset links
     path('password_change/done/',
          auth_views.PasswordChangeDoneView.as_view(template_name='password_reset/password_change_done.html'),
@@ -44,8 +46,6 @@ urlpatterns = [
     path('reset/done/',
          auth_views.PasswordResetCompleteView.as_view(template_name='password_reset/password_reset_complete.html'),
          name='password_reset_complete'),
-    # Spoonacular api url
-    path("api/", include("spoonacular_api.urls")),
 ]
 
 # Builds a url that tells Django where static and media files hosted in development
