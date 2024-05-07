@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}Recipe Search Results{% endblock %}
+
+{% block content %}
+    <!-- Load static files -->
+    {% load static %}
+    <link href="{% static 'main/style.css' %}" rel="stylesheet">
+
+    <div class="container">
+        <h1 class="text-center">Recipe Search Results</h1>
+        <!-- Recipe cards -->
+        <div class="d-flex flex-wrap justify-content-center">
+            {% for recipe in recipes %}
+                <div class="recipe-card mx-2 mb-4">
+                    <!-- Recipe image -->
+                    <img src="{{ recipe.image }}" class="recipe-image" alt="{{ recipe.title }}">
+                    <!-- Recipe details -->
+                    <div class="recipe-details">
+                        <!-- Recipe title -->
+                        <h5 class="mt-3 mb-1">{{ recipe.title }}</h5>
+                    </div>
+                </div>
+                <!-- Create a new row after every 5th recipe -->
+                {% if forloop.counter|divisibleby:5 and not forloop.last %}
+                    <div class="w-100"></div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+

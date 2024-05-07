@@ -3,7 +3,6 @@ from django.contrib import messages
 from .forms import RecipeForm
 import requests
 from django.conf import settings
-import re
 from django.shortcuts import render
 
 
@@ -35,6 +34,9 @@ def recipe_search(request):
             if type:
                 url += f'&type={type}'
 
+            # Specify the number of results per page
+            url += '&number=500'
+
             # Make a GET request to Spoonacular API
             response = requests.get(url)
 
@@ -42,6 +44,13 @@ def recipe_search(request):
             if response.status_code == 200:
                 # Extract recipe data from the response
                 recipes = response.json()['results']
+
+                # If no recipes found
+                if not recipes:
+                    # Return an error message. Redirects to search page
+                    messages.error(request, "No recipes for this query. Try again")
+                    return redirect("spoonacular_api:recipe_search")
+
                 context = {'recipes': recipes}
                 # Render the search results template with recipe data
                 return render(request, "spoonacular_api/search_results.html", context)
