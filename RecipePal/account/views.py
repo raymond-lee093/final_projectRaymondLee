@@ -65,7 +65,7 @@ def register_user(request, *args, **kwargs):
         form = RegistrationForm()
         context['registration_form'] = form
 
-    return render(request, "authentication/register.html", context)
+    return render(request, 'authentication/register.html', context)
 
 
 def account_view(request, *args, **kwargs):
