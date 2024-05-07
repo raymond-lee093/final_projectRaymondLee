@@ -12,8 +12,10 @@
         <div class="d-flex flex-wrap justify-content-center">
             {% for recipe in recipes %}
                 <div class="recipe-card mx-2 mb-4">
-                    <!-- Recipe image -->
-                    <img src="{{ recipe.image }}" class="recipe-image" alt="{{ recipe.title }}">
+                    <a href="{% url 'spoonacular_api:recipe_details' recipe.id %}">
+                        <!-- Recipe image -->
+                        <img src="{{ recipe.image }}" class="recipe-image" alt="{{ recipe.title }}">
+                    </a>
                     <!-- Recipe details -->
                     <div class="recipe-details">
                         <!-- Recipe title -->

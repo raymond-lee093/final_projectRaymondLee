@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Recipe Details{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="text-center">Recipe Details</h1>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                {% for ingredient in details %}
+                    <div class="card mb-3">
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                                <img src="{{ ingredient.image }}" class="card-img" alt="{{ ingredient.name }}">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ ingredient.name }}</h5>
+                                    <p class="card-text">Price: {{ ingredient.price }} USD</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

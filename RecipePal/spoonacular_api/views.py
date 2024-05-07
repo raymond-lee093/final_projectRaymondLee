@@ -3,7 +3,6 @@ from django.contrib import messages
 from .forms import RecipeForm
 import requests
 from django.conf import settings
-from django.shortcuts import render
 
 
 def recipe_search(request):
@@ -66,3 +65,38 @@ def recipe_search(request):
         # If the request is not POST, render the form
         form = RecipeForm()
         return render(request, 'spoonacular_api/recipe_search.html', {'form': form})
+
+
+def recipe_details(request, recipe_id):
+    # Get Spoonacular API key from settings
+    api_key = settings.SPOONACULAR_API_KEY
+
+    # Construct the URL for fetching recipe details
+    url = f"https://api.spoonacular.com/recipes/{recipe_id}/priceBreakdownWidget.json?apiKey={api_key}"
+
+    # Specify the number of results per page
+    url += '&number=500'
+
+    # Make a GET request to the Spoonacular API
+    response = requests.get(url)
+
+    # Check if the response is successful
+    if response.status_code == 200:
+        # Extract detailed information from the response
+        details = response.json()["ingredients"]
+
+        # Extract image URL for each ingredient
+        for ingredient in details:
+            ingredient["image"] = f"https://spoonacular.com/cdn/ingredients_100x100/{ingredient['image']}"
+
+        # Prepare context to pass to the template
+        context = {'details': details}
+
+        # Render the recipe details template with the recipe information
+        return render(request, 'spoonacular_api/recipe_details.html', context)
+    else:
+        # If the response is not successful, display an error message and redirect to the recipe search page
+        messages.error(request, "Failed to fetch recipe details.")
+        return redirect("spoonacular_api:recipe_search")
+
+
