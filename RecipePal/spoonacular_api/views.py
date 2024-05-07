@@ -3,7 +3,7 @@ from django.contrib import messages
 from .forms import RecipeForm
 import requests
 from django.conf import settings
-
+import re
 from django.shortcuts import render
 
 
@@ -26,10 +26,14 @@ def recipe_search(request):
             url = f"https://api.spoonacular.com/recipes/complexSearch?apiKey={api_key}"
 
             # Construct the URL with search parameters from form
-            url += f'&query={query}'
-            url += f'&cuisine={cuisine}'
-            url += f'&intolerances={intolerances}'
-            url += f'&type={type}'
+            if query:
+                url += f'&query={query}'
+            if cuisine:
+                url += f'&cuisine={cuisine}'
+            if intolerances:
+                url += f'&intolerances={intolerances}'
+            if type:
+                url += f'&type={type}'
 
             # Make a GET request to Spoonacular API
             response = requests.get(url)
