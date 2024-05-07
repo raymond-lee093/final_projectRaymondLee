@@ -4,6 +4,13 @@ from .forms import RecipeForm
 import requests
 from django.conf import settings
 
+from django.shortcuts import render
+
+
+def home(request):
+    context = {}
+    return render(request, "spoonacular_api/home.html", context)
+
 
 def recipe_search(request):
     if request.method == 'POST':
@@ -38,16 +45,16 @@ def recipe_search(request):
                 recipes = response.json()['results']
                 context = {'recipes': recipes}
                 # Render the search results template with recipe data
-                return render(request, "templates/spoonacular", context)
+                return render(request, "spoonacular_api/search_results.html", context)
             else:
-                # Return an error message. Redirects to homepage
+                # Return an error message. Redirects to search page
                 messages.error(request, "Failed to fetch recipes.")
-                return redirect("main:index")
+                return redirect("spoonacular_api:recipe_search")
         else:
-            # Form is invalid, return errors and go to homepage
+            # Form is invalid, return errors and go to search page
             messages.error(request, "Form is invalid.")
-            return redirect("main:index")
+            return redirect("spoonacular_api:recipe_search")
     else:
         # If the request is not POST, render the form
         form = RecipeForm()
-        return render(request, 'main/index.html', {'form': form})
+        return render(request, 'spoonacular_api/home.html', {'form': form})
