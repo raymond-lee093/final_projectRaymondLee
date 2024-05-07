@@ -1,61 +1,123 @@
-# final_projectRaymondLee
-
-Run the collectstatic management command:
-python manage.py collectstatic
-This will copy all files from your static folders into the STATIC_ROOT directory.
+### INF601 - Advanced Programming in Python
+### Raymond Lee
+### Final Project
 
 
-Used for icon images used
-https://fonts.google.com/icons
+# Final Project
 
-Django Github docs
-https://github.com/django/django/tree/main
+## Description
 
 
+This project combines the Django web framework with the Spoonacular API to create a recipe search and management 
+application. Users can search for recipes based on ingredients, cuisine type, dietary restrictions, and meal type. 
+The application fetches recipe information from the Spoonacular API and displays the results to the user.
+User Authentication and Authorization: Users can register, log in, log out, and reset their passwords.
+User Profile Management: Users have profile pages where they can update their email addresses.
+Recipe Search: Users can search for recipes based on ingredients, cuisine type, dietary restrictions, and meal type.
+Detailed Recipe Information: Users can view detailed information about a specific recipe, including ingredients and 
+their prices. PostgreSQL is used for storing user information and recipe data.
+Spoonacular API provides recipe data and information about ingredients. For frontend styling and design, HTML, CSS, and 
+are used.
 
-Created a new custom user model which means that basic users of project are being built differently
-and superusers are being built differently.
-It is best to clear out the database and recreate a new superuser so database can run smoothly
 
-Interact with Postgres from terminal
-To use command line tools (like psql) from your Terminal, add Postgres.app’s bin folder to your $PATH:
+## Getting Started
 
-You can do this with the following command:
+### Dependencies
 
-sudo mkdir -p /etc/paths.d && echo /Applications/Postgres.app/Contents/Versions/latest/bin | sudo tee /etc/paths.d/postgresapp
+* [Django Documentation](https://docs.djangoproject.com/en/5.0/)
+* [Django Github Docs](https://github.com/django/django/tree/main)
+* [Python](https://automatetheboringstuff.com/#toc)
+* [Bootstrap](https://getbootstrap.com/docs/5.3/getting-started/introduction/)
+* [Jinja2](https://flask.palletsprojects.com/en/3.0.x/templating/#jinja-setup)
+* [Spoonacular API docs](https://spoonacular.com/food-api/docs)
 
-Login with postgres user with highest privileges:
-command: psql postgres postgres
+### Pip install instructions
 
-Create new user
-command: CREATE USER django WITH PASSWORD '1234'(can create own password);
+Please run the following:
+```
+pip install -r requirements.txt
+```
 
-Verify user creation:
-command: \du
+### Executing program
 
-Verify created databases:
-command: \l
+Configure the PostgreSQL database in settings.py.
+```
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "Database name",
+        "USER": "user name",
+        "PASSWORD": "your_password",
+        "HOST": "localhost",
+        "PORT": "5432",
+    }
+}
 
-Drop the database that is in current use in project which will clear the data
-command: DROP DATABASE databasename;
+```
+In a terminal window, please type the following: <br>
+This will create any SQL entries that need to go into the database
 
-Verify created databases: (see if database was deleted)
-command: \l
+```
+python manage.py makemigrations 
+```
 
-Create the database again
-command: CREATE DATABASE databasename;
+This will apply the migrations
+```
+python manage.py migrate
+```
 
-Verify created database:
-command: \l
+This will create the administrator login info for your /admin side of your project
+```
+python manage.py createsuperuser 
+```
 
-Finally, execute the “GRANT ALL PRIVILEGES” command to grant all the database privileges to the user, 
-such as creating a database.
-command: GRANT ALL PRIVILEGES ON databasename TO django;
+Start Django server
 
-to stop interacting with postgres 
-command: "\q"
+```
+python manage.py runserver
 
-Spoonacular api docs
-https://spoonacular.com/food-api/docs
+```
+## Help
+
+Link to visit admin site, administrator login info must be created first
+```
+http://localhost:8000/admin/login/?next=/admin/
+```
+
+### Password reset
+To password reset, complete within project. In the console you will receive an email with
+the subject as 'Password reset on 127.0.0.1:8000', from 'webmaster@localhost', and to 
+the email associated with the created account. Within the subject of email, you are to copy the link 
+that is sent and paste it in the browser url to complete the password reset.
+
+## Authors
+
+Contributors names and contact info
+
+ex. Raymond Lee 
+
+## Version History
+
+* 0.1
+    * Initial Release
+
+## License
+
+This project is licensed under the MIT License.
+
+## Acknowledgments
+
+Inspiration, code snippets, etc.
+* [Django Tutorial](https://docs.djangoproject.com/en/5.0/intro/tutorial01/)
+* [Google Icon Images](https://fonts.google.com/icons)
+
+
+
+
+
+
+
+
+
 
 
