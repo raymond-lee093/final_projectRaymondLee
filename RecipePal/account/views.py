@@ -24,7 +24,7 @@ def login_user(request):
             messages.error(request, "Your username or password didn't match. Try again.")
             return redirect("account:login_user")
     else:
-        return render(request, "authentication/login.html", context)
+        return render(request, 'authentication/login.html', context)
 
 
 def logout_user(request):
