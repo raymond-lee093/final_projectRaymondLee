@@ -12,7 +12,7 @@
             <div class="card card-signin">
                 <div class="card-body">
                     <!-- Recipe form -->
-                    <form class="form-signin" method="GET">
+                    <form class="form-signin" method="POST">
                     <h1 class="text-center mb-4">Recipe Search</h1>
                         {% csrf_token %}
                         <!-- Logo image -->
@@ -22,16 +22,16 @@
                         <p style="font-size: small"><i>Note: Separate multiple inputs with commas.<br>
                             Ex: pepper, salt, chicken</i></p>
                         <!-- Ingredient field -->
-                        <input type="text" name="ingredient" id="inputIngredient" class="form-control mb-2" placeholder="Enter ingredient(s)" required autofocus>
+                        <input type="text" name="query" id="inputIngredient" class="form-control mb-2" placeholder="Enter ingredient(s)" required autofocus>
 
                         <!-- Cuisine field -->
                         <input type="text" name="cuisine" id="inputCuisine" class="form-control mb-2" placeholder="Enter cuisine type(s)">
 
                         <!-- Diet Restriction field -->
-                        <input type="text" name="dietrestriction" id="inputDietrestriction" class="form-control mb-2" placeholder="Enter dietary restriction(s)">
+                        <input type="text" name="intolerances" id="inputDietrestriction" class="form-control mb-2" placeholder="Enter dietary restriction(s)">
 
                         <!-- Confirm password field -->
-                        <input type="text" name="mealtype" id="inputMealtype" class="form-control mb-2" placeholder="Enter meal type(s)">
+                        <input type="text" name="type" id="inputMealtype" class="form-control mb-2" placeholder="Enter meal type(s)">
 
                         <!-- Display form errors -->
                         {% for field in recipe_form %}
@@ -47,7 +47,7 @@
                             </div>
                         {% endif %}
 
-                        <!-- Register button -->
+                        <!-- Search button -->
                         <button class="btn btn-lg btn-primary btn-block" type="submit">Search</button>
                     </form>
                 </div>
