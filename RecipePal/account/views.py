@@ -18,7 +18,7 @@ def login_user(request):
         if user is not None:
             # Login user
             login(request, user)
-            return redirect("main:index")
+            return redirect("spoonacular_api:home")
         else:
             # Return an 'invalid login' error message. Redirects to login page
             messages.error(request, "Your username or password didn't match. Try again.")
@@ -55,8 +55,8 @@ def register_user(request, *args, **kwargs):
             if destination:
                 # Redirect to the next URL if provided
                 return redirect("destination")
-            # Redirect to the home page after successful registration
-            return redirect('main:index')
+            # Redirect to the search page after successful registration
+            return redirect('spoonacular_api:home')
         else:
             # If the form is not valid, pass the form back to the template with errors
             context['registration_form'] = form
